@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update Store</title>
+</head>
+
+<body>
+  <!-- Main heading of the page -->
+  <h1>Edit Store</h1>
+
+  <form id="editStoreForm" action="/editStore/<%= storeData.sid %>" method="post">
+    <label for="sid">Store ID:</label>
+    <input type="text" id="sid" name="sid" value="<%= storeData.sid %>" readonly required>
+    <p></p>
+    <label for="location">Location:</label>
+    <input type="text" id="location" name="location" value="<%= storeData.location %>" required>
+    <p></p>
+    <label for="mgrid">Manager ID:</label>
+    <input type="text" id="mgrid" name="mgrid" value="<%= storeData.mgrid %>" required>
+    <p></p>
+    <button type="submit">Edit</button>
+  </form>
+
+  <script>
+    // JavaScript that runs when the document is fully loaded
+    document.addEventListener('DOMContentLoaded', function () {
+      // Getting the form element by its ID  
+      const editStoreForm = document.getElementById('editStoreForm');
+      // Adding an event listener for the form submission
+
+      editStoreForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        // Collecting form data
+        const storeId = document.getElementById('sid').value;
+        const newLocation = document.getElementById('location').value;
+        const newManagerId = document.getElementById('mgrid').value;
+
+        // Function update the store. It's using a fetch request to send data to the server without reloading the page.
+        updateStore(storeId, { location: newLocation, mgrid: newManagerId })
+          .then(() => {
+            alert('Store updated successfully!');
+          })
+          .catch((error) => {
+            alert('Error updating store: ' + error.message);
+          });
+      });
+
+      //Async function to send update request to the server
+      async function updateStore(storeId, newData) {
+        try {
+          // Fetch API is used to send a POST request with JSON-encoded data
+          const response = await fetch(`/editStore/${encodeURIComponent(storeId)}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ newData }),// Stringify the new data for the request payload
+          });
+
+          // Check if the response is not OK, throw an error
+          if (!response.ok) {
+            const errorMessage = await response.text();
+            throw new Error(`Failed to update store. Server returned ${response.status} - ${errorMessage}`);
+          }
+        } catch (error) {
+          console.error('Client-side error:', error);// Log the error to the console
+          throw error; // Rethrow the error to ensure it's propagated
+        }
+      }
+    });
+  </script>
+
+  <!-- Link to return to the home page -->
+  <br>
+  <a href="/">Home</a>
+
+</body>
+
+</html>

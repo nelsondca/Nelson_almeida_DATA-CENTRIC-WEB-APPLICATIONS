@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Managers (MongoDB)</title>
+  <style>
+    /*CSS styles for the table */
+    table {
+      width: 70%;
+      border-collapse: collapse;
+
+    }
+
+    th,
+    td {
+      border: 1px solid black;
+      padding: 4px;
+      text-align: left;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <h1>Managers</h1>
+    <a href="/managers/add">Add Manager(MongoDB)</a>
+  </div>
+  <table>
+    <tr>
+      <th>Manager ID</th>
+      <th>Name</th>
+      <th>Salary</th>
+    </tr>
+    <!-- In managers.ejs -->
+    <% managers.forEach(manager=> { %>
+
+      <tr>
+        <td>
+          <%= manager.managerId %>
+        </td>
+        <td>
+          <%= manager.name %>
+        </td>
+        <td>
+          <%= manager.salary.toFixed(2) %>
+        </td>
+      </tr>
+      <% }); %>
+
+  </table>
+  <a href="/">Home</a>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Add Manager</title>
+    <style>
+        /* CSS Styles*/
+        .error-list {
+            color: rgb(0, 0, 0);
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Main heading for the Add Manager page -->
+    <h1>Add Manager</h1>
+    <!-- Unordered list for error messages, shown for user guidance -->
+    <ul class="error-list">
+        <li>Manager ID must be 4 characters</li>
+        <li>Name must be > 5 characters</li>
+        <li>Salary must be between 30,000 and 70,000</li>
+    </ul>
+    <!-- Form for adding a new manager -->
+    <form action="/managers/add" method="post">
+        <label for="managerId">Manager ID</label>
+        <input type="text" id="managerId" name="managerId" required><br>
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required><br>
+        <label for="salary">Salary</label>
+        <input type="number" id="salary" name="salary" required><br>
+        <!-- Submit button for the form -->
+        <button type="submit">Add</button>
+    </form>
+    <!-- Link to return to the home page -->
+    <a href="/">Home</a>
+</body>
+
+</html>

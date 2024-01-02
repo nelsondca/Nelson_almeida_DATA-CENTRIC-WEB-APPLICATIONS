@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    table {
+      width: 70%;
+      /* Sets the width of the table to 70% of its containing element */
+      border-collapse: collapse;
+      /* Collapses cell borders into a single border */
+
+      /* Eliminate the space between borders */
+    }
+
+    th,
+    td {
+      border: 1px solid black;
+      /* Each cell has a solid, black border with a width of 1px */
+      padding: 4px;
+      /* Sets padding inside each cell to 4 pixels on all sides */
+      text-align: left;
+      /* Aligns text to the left within cells */
+    }
+  </style>
+
+</head>
+
+<body>
+  <!-- Main heading for the products page -->
+  <h1>Products</h1>
+
+  <!-- Creates a table to display product information -->
+  <table>
+
+    <th>Product ID (PID)</th>
+    <th>Store ID (SID)</th>
+    <th>Price</th>
+    </tr>
+    <!-- The following block dynamically creates table rows based on the product_store data passed to the EJS template -->
+    <% product_store.forEach((currentElement)=> { %>
+      <tr>
+        <!-- Inserts the Product ID, Store ID and the price from the current element of the loop -->
+        <td>
+          <%= currentElement.pid %>
+        </td>
+        <td>
+          <%= currentElement.sid %>
+        </td>
+        <td> €<%= currentElement.Price %>
+        </td>
+      </tr>
+      <tr class="separator">
+      </tr>
+      <% }) %><!-- Ends the loop over the product_store array -->
+  </table>
+  <br><br>
+  <!-- Link to navigate back to the Home Page -->
+  <a href="/">Home Page</a>
+
+</body>
+
+</html>

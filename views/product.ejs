@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+    <style>
+        /*  CSS styles for the table */
+        table {
+            width: 70%;
+            border-collapse: collapse;
+
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 4px;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Products</h1>
+    <table>
+        <tr>
+            <th>Product ID</th>
+            <th>Description</th>
+            <th>Supplier</th>
+            <th>Store ID</th>
+            <th>Location</th>
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+        <!-- EJS loop to iterate over each product and create a table row -->
+        <% products.forEach((product)=> { %>
+            <tr>
+                <td>
+                    <%= product.pid %>
+                </td>
+                <td>
+                    <%= product.productdesc %>
+                </td>
+                <td>
+                    <%= product.supplier %>
+                </td>
+                <td>
+                    <%= product.sid %>
+                </td>
+                <td>
+                    <%= product.location %>
+                </td>
+                <td>$<%= product.Price.toFixed(2) %>
+                </td>
+                <!-- Create a delete link for each product row -->
+                <td><a href="/products/delete/<%= product.pid %>">Delete</a></td>
+
+            </tr>
+            <% }) %>
+    </table>
+    <a href="/">Home Page</a>
+</body>
+
+</html>
